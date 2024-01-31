@@ -2,6 +2,10 @@
     Survey
 {{ endblock }}
 
+{{ block styles }}
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+{{ endblock }}
+
 {{ block content }}
 <div id="app">
     <div class="btn-group my-3">
@@ -22,18 +26,16 @@
 {{ endblock }}
 
 {{ block scripts }}
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script>
-    
-    const Page1 = {
+    const Page1 = Vue.markRaw({
         template: `{{ include_sibling "page1.html" }}`
-    };
-    const Page2 = {
+    });
+    const Page2 = Vue.markRaw({
         template: `{{ include_sibling "page2.html" }}`
-    };
-    const Page3 = {
+    });
+    const Page3 = Vue.markRaw({
         template: `{{ include_sibling "page3.html" }}`
-    };
+    });
     document.addEventListener('DOMContentLoaded', function () {
         const app = Vue.createApp({
             data() {
@@ -54,11 +56,6 @@
                 prevPage() {
                     if(this.pageIndex > 0) this.pageIndex--;
                 }
-            },
-            components: {
-                Page1,
-                Page2,
-                Page3
             },
             delimiters: ['[[', ']]']
         });
